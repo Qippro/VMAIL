@@ -1,0 +1,49 @@
+<input type="button" id=  "a" />
+
+<div id="results">
+  <span id="final_span" class="final"></span>
+  <span id="interim_span" class="interim"></span>
+</div>
+
+<script type="text/javascript">
+ var final_transcript = '';
+var recognizing = true;
+
+ console.log("started");
+ document.getElementById('start_button').clickit();
+function clickit()
+  {
+  value="Inset Border" style="border-style:inset;
+    
+    console.log("clicked");
+  }
+if ('webkitSpeechRecognition' in window) {
+
+  var recognition = new webkitSpeechRecognition();
+
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  final_transcript = '';
+  recognition.lang = 'en-US';
+
+    var interim_transcript = '';
+
+    recognition.onresult = function(event) {
+    for (var i = event.resultIndex; i < event.results.length; ++i) {
+      if (event.results[i].isFinal) {
+	    console.log( event.results[i][0].transcript);
+     
+        final_transcript += event.results[i][0].transcript;
+      } else {
+        interim_transcript += event.results[i][0].transcript;
+      }
+    }
+    final_span.innerHTML = final_transcript;
+    
+ 
+};
+}
+
+
+
+</script>
